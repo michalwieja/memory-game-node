@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Paytone+One&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Paytone One", sans-serif;
+}
+
+body {
+    font-family: sacramento, sans-serif;
+    background-image: url("../img/gili-bg.svg");
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    color: #6d2128;
+}
+
+.logo {
+    background-image: url("../img/gili.svg");
+    background-size: cover;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    border: none;
+}
+
+.pop {
+    position: absolute;
+    background: #f6e4e4;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5vh;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.winner {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.info {
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    opacity: 1;
+    visibility: visible;
+    background-image: url("../img/gili-bg.svg");
+}
+
+h3 {
+    font-size: 4vh;
+}
+
+h4 {
+    font-size: 3vh;
+}
+
+.grid {
+    display: grid;
+    grid-template: "1fr 1fr 1fr 1fr";
+    grid-gap: 0.5rem;
+    width: 50%;
+    margin: auto;
+    margin-top: 10vh;
+}
+
+.easy {
+    grid-template: "1fr 1fr 1fr";
+}
+
+button {
+    justify-self: center;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    background-image: url("../img/gili.svg");
+    background-size: cover;
+}
+
+form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+input,
+select {
+    width: 50%;
+    height: 5vh;
+    font-size: 3vh;
+    text-align: center;
+    text-align-last: center;
+    color: #6d2128;
+    background-color: #fff;
+    border: none;
+}
+
+@media (max-width: 1024px) {
+    .grid {
+        grid-gap: 0.5rem;
+        width: 90%;
+        margin: 10vh auto;
+    }
+
+    button {
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+    }
+
+    form {
+        width: 90%;
+    }
+
+    .info {
+        height: 30%;
+    }
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+
+    <h2></h2>
+
+    <div class="info">
+        <h3>hej <span id="nameValue"> <%= name %></span></h3>
+        <h3>Twój poziom to: <span id="level"></span><%= level %></h3>
+
+        <h3>wynik: <span id="score">0</span></h3>
+        <h4>liczba ruchów: <span id="turns">0</span></h3>
+    </div>
+
+    <div class="grid">
+
+    </div>
+
+    <div class="winner pop">
+        <h1>gratulacje <%= name %></h1>
+        <h2>Poziom <%= level %> rozwiązany w <span id="winningTurns"></span> ruchach</h2>
+
+    </div>
+
+
+
+    <script src="/javascripts/game.js"></script>
+</body>
+
+</html>
