@@ -22,26 +22,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
-app.get("/all", (req, res) => {
-  const mongoose = require("mongoose");
-  require("dotenv/config");
-  const User = require("./models/User");
-
-  mongoose.connect(
-    process.env.DB_CONNECTION,
-    { useNewUrlParser: true },
-
-    () => console.log("connected")
-  );
-  User.find({}, function (err, users) {
-    let userMap = {};
-    users.foreach((user) => {
-      userMap[user._id] = uesr;
-    });
-    res.send(userMap);
-  });
-});
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -57,6 +37,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-//db
 
 module.exports = app;

@@ -8,61 +8,31 @@ const grid = document.querySelector(".grid");
 const score = document.querySelector("#score");
 const turns = document.querySelector("#turns");
 const winningTurns = document.querySelector("#winningTurns");
+let cards;
 
-const cards = [
-  { name: "delfin", img: "../img/delfin.svg" },
-  { name: "delfin", img: "../img/delfin.svg" },
-  { name: "gwiazda", img: "../img/gwiazda.svg" },
-  { name: "gwiazda", img: "../img/gwiazda.svg" },
-  { name: "konik", img: "../img/konik.svg" },
-  { name: "konik", img: "../img/konik.svg" },
-  { name: "krab", img: "../img/krab.svg" },
-  { name: "krab", img: "../img/krab.svg" },
-  { name: "kreweta", img: "../img/kreweta.svg" },
-  { name: "kreweta", img: "../img/kreweta.svg" },
-  { name: "muszla", img: "../img/muszla.svg" },
-  { name: "muszla", img: "../img/muszla.svg" },
-  { name: "osmiornica", img: "../img/osmiornica.svg" },
-  { name: "osmiornica", img: "../img/osmiornica.svg" },
-  { name: "plaszcz", img: "../img/plaszcz.svg" },
-  { name: "plaszcz", img: "../img/plaszcz.svg" },
-  { name: "rekin", img: "../img/rekin.svg" },
-  { name: "rekin", img: "../img/rekin.svg" },
-  { name: "ryba", img: "../img/ryba.svg" },
-  { name: "ryba", img: "../img/ryba.svg" },
-  { name: "skalar", img: "../img/skalar.svg" },
-  { name: "skalar", img: "../img/skalar.svg" },
-  { name: "zolw", img: "../img/zolw.svg" },
-  { name: "zolw", img: "../img/zolw.svg" },
-];
-let cardsSliced = cards.slice(20);
-// if (level === "easy") {
-//   cardsSliced = cards.slice(12);
-//   grid.classList.add("easy");
-// } else if (level === "medium") {
-//   cardsSliced = cards.slice.slice(8);
-// } else if (level === "hard") {
-//   cardsSliced = cards.slice.slice(0);
-// }
+fetch("/cards")
+  .then((response) => response.json())
+  .then((data) => (cards = data))
+  .then(() => createCards(cards));
 
-let cardsShuffled = cardsSliced.sort(() => 0.5 - Math.random());
+function createCards(cards) {
+  cards.forEach((card, index) => {
+    let button = document.createElement("button");
 
-cardsShuffled.forEach((card, index) => {
-  let button = document.createElement("button");
-
-  button.setAttribute("data-id", index);
-  button.addEventListener("click", flipcard);
-  grid.appendChild(button);
-});
+    button.setAttribute("data-id", index);
+    button.addEventListener("click", flipcard);
+    grid.appendChild(button);
+  });
+}
 
 // flip
 
 function flipcard() {
   let id = this.getAttribute("data-id");
-  this.style.backgroundImage = `url(${cardsShuffled[id].img})`;
+  this.style.backgroundImage = `url(${cards[id].img})`;
   this.disabled = true;
 
-  choosenCards.push(cardsShuffled[id].name);
+  choosenCards.push(cards[id].name);
   choosenCardsId.push(id);
 
   if (choosenCards.length === 2) {
@@ -108,7 +78,7 @@ function check() {
   choosenCardsId = [];
 
   score.textContent = cardsWon.length;
-  if (cardsWon.length === cardsShuffled.length / 2) {
+  if (cardsWon.length === cards.length / 2) {
     document.querySelector(".winner").style.visibility = "visible";
     document.querySelector(".winner").style.opacity = 1;
     winningTurns.textContent = turnsNumber;
