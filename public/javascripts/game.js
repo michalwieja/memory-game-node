@@ -112,5 +112,25 @@ function check() {
     document.querySelector(".winner").style.visibility = "visible";
     document.querySelector(".winner").style.opacity = 1;
     winningTurns.textContent = turnsNumber;
+
+    const data = { winningTurns: turnsNumber };
+
+    fetch("/winner", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    setTimeout(() => {
+      location = location;
+    }, 5000);
   }
 }
