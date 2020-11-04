@@ -29,6 +29,35 @@ body {
     border: none;
 }
 
+.scores {
+    display: flex;
+    width: 90%;
+    justify-content: space-evenly;
+    font-size: 3vh;
+    color: #777;
+}
+
+.scores div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.scores div div {
+    font-size: 2vh;
+}
+
+/* .easy {
+    color: yellow
+}
+
+.medium {
+    color: pink;
+} */
+
+
+
 .pop {
     position: absolute;
     background: #f6e4e4;

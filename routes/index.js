@@ -1,5 +1,9 @@
 var express = require("express");
 var router = express.Router();
+let UserModel = require("../model/user");
+
+const mongoose = require("mongoose");
+require("dotenv/config");
 
 let name;
 let level;
@@ -48,10 +52,9 @@ router.use("/cards", (req, res) => {
     { name: "zolw", img: "../img/zolw.svg" },
   ];
   let cardsSliced;
-  console.log(level);
 
   if (level === "easy") {
-    cardsSliced = cards.slice(20);
+    cardsSliced = cards.slice(12);
   } else if (level === "medium") {
     cardsSliced = cards.slice(8);
   } else if (level === "hard") {
@@ -61,14 +64,37 @@ router.use("/cards", (req, res) => {
 
   res.json(cardsShuffled);
 });
+// send scorelist
+router.use("/score", (req, res) => {
+  mongoose
+    .connect(process.env.DB_CONNECTION, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => {
+      console.log("Connected to Database");
+      UserModel.find((err, users) => {
+        res.json(users);
+      });
+    })
+    .catch((err) => {
+      console.log("Not Connected to Database ERROR! ", err);
+    });
+});
 
 /* Send winner detail to db */
 
 router.post("/winner", (req, res) => {
   winningTurns = req.body.winningTurns;
 
-  console.log(name, level, winningTurns);
-
-  //db
+  let user = new UserModel({
+    name: name,
+    level: level,
+    turns: winningTurns,
+  });
+  user
+    .save()
+    .then(() => console.log("saved"))
+    .catch((err) => console.log(err));
 });
 module.exports = router;
